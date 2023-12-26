@@ -2,6 +2,7 @@ import json
 import argparse
 import subprocess
 import os
+import numpy as np
 from pathlib import Path
 import pandas as pd
 from tqdm import tqdm
@@ -29,11 +30,13 @@ if args.download and args.channel:
 for file in tqdm(list(mp3s_dir.rglob('*.mp3'))):
     result = find_offset_between_files('ekt.mp3', str(file))
     filename_stripped = file.name
+
     result_dict = {
         "file": filename_stripped,
         "offset": result["time_offset"],
-        "standard_score": result["standard_score"]
+        "standard_score": 0 if np.isnan(result['standard_score']) else result['standard_score']
     }
+    print(result_dict)
     RESULTS.append(result_dict)
 
 # sorting by standard_score descending
