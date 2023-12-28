@@ -26,7 +26,7 @@ if args.download and args.channel:
     mp3s_dir.mkdir(parents=True, exist_ok=True)
     subprocess.run(['yt-dlp', '-x', '--audio-format', 'mp3', '--audio-quality', '0',
                     '-f', 'best', '-N', '5',
-                    f"-o {str(mp3s_dir)}{os.sep}%(title)s.%(ext)s",
+                    '-o', f'{mp3s_dir}{os.sep}%(title)s.%(ext)s',
                     '--verbose', f'https://www.youtube.com/@{args.channel}'],
                     check=True)
 
