@@ -2,8 +2,8 @@ import json
 import argparse
 import subprocess
 import os
-import numpy as np
 from pathlib import Path
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from audio_offset_finder.audio_offset_finder import find_offset_between_files
@@ -24,7 +24,11 @@ mp3s_dir = curr_dir / DIRECTORY
 
 if args.download and args.channel:
     mp3s_dir.mkdir(parents=True, exist_ok=True)
-    subprocess.run(f'yt-dlp -x --audio-format mp3 --audio-quality 0 -f best -N 5 -o {str(mp3s_dir)}{os.sep}%\(title\)s.%\(ext\)s --verbose https://www.youtube.com/@{args.channel}', shell=True, check=True)
+    subprocess.run(['yt-dlp', '-x', '--audio-format', 'mp3', '--audio-quality', '0',
+                    '-f', 'best', '-N', '5',
+                    f"-o {str(mp3s_dir)}{os.sep}%(title)s.%(ext)s",
+                    '--verbose', f'https://www.youtube.com/@{args.channel}'],
+                    check=True)
 
 # constructing dict
 for file in tqdm(list(mp3s_dir.rglob('*.mp3'))):
@@ -36,7 +40,6 @@ for file in tqdm(list(mp3s_dir.rglob('*.mp3'))):
         "offset": result["time_offset"],
         "standard_score": 0 if np.isnan(result['standard_score']) else result['standard_score']
     }
-    print(result_dict)
     RESULTS.append(result_dict)
 
 # sorting by standard_score descending
