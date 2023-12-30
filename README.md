@@ -7,7 +7,7 @@ Python tool for finding offset of an mp3 file within another mp3 files. Supports
 * openpyxl
 * audio-offset-finder (find about it [here](https://github.com/bbc/audio-offset-finder))
 
-It is recommended not to use Python >3.11. 
+It is recommended not to use Python >3.11.\
 You may install them "as is": ```pip install tqdm pandas openpyxl audio-offset-finder```.\
 If it's problematic, use fixed versions from ```requirements.txt```: ```pip install -r requirements.txt```.\
 
