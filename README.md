@@ -1,5 +1,5 @@
 # SampleFinder
-Tool for finding offset of an mp3 file within another mp3 files. Supports downloading mp3s from YT channel
+Python tool for finding offset of an mp3 file within another mp3 files. Supports downloading mp3s from YT channel
 
 ## Main dependencies
 * tqdm
@@ -7,8 +7,9 @@ Tool for finding offset of an mp3 file within another mp3 files. Supports downlo
 * openpyxl
 * audio-offset-finder (find about it [here](https://github.com/bbc/audio-offset-finder))
 
+It is recommended not to use Python >3.11. 
 You may install them "as is": ```pip install tqdm pandas openpyxl audio-offset-finder```.\
-If it's problematic, use fixed versions from ```requirements.txt```: ```pip install -r requirements.txt```.
+If it's problematic, use fixed versions from ```requirements.txt```: ```pip install -r requirements.txt```.\
 
 ## Features
 * Downloading all videos from YT channel and converting them to .mp3s (yt-dlp needed)
