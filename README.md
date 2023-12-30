@@ -28,7 +28,7 @@ options:
   --download            Download all videos from a channel
 ```
 
--d argument, followed by directory name, is required. To download videos, use --download combined with -c or --channel, followed by channel name.\
+-d argument, followed by directory name, is required. To download videos, use --download combined with -c or --channel, followed by channel name.
 
 ```python3 samplefinder.py -d dominik500``` - without download, use .mp3s stored in "dominik500" folder.\
 ```python3 samplefinder.py -d my_dir --download -c dominik500``` - download everything from "dominik500" channel and use .mp3s stored in "my_dir".
