@@ -21,6 +21,8 @@ DIRECTORY = args.dir
 
 curr_dir = Path().absolute()
 mp3s_dir = curr_dir / DIRECTORY
+json_path = mp3s_dir / f'{DIRECTORY}.json'
+excel_path = mp3s_dir / f'{DIRECTORY}.xlsx'
 
 if args.download and args.channel:
     mp3s_dir.mkdir(parents=True, exist_ok=True)
@@ -36,7 +38,8 @@ if args.download and args.channel:
         ydl.download([f'https://www.youtube.com/@{args.channel}'])
 
 # constructing dict
-for file in tqdm(list(mp3s_dir.rglob('*.mp3'))):
+mp3s_in_dir = list(mp3s_dir.rglob('*.mp3'))
+for file in tqdm(mp3s_in_dir, desc="Comparing sample to mp3s", dynamic_ncols=True, ascii=" ="):
     result = find_offset_between_files('ekt.mp3', str(file))
     filename_stripped = file.name
 
@@ -45,12 +48,13 @@ for file in tqdm(list(mp3s_dir.rglob('*.mp3'))):
         "offset": result["time_offset"],
         "standard_score": 0 if np.isnan(result['standard_score']) else result['standard_score']
     }
+
     RESULTS.append(result_dict)
 
 # sorting by standard_score descending
 RESULTS = sorted(RESULTS, key=lambda x: x["standard_score"], reverse=True)
 
-with open(f'{DIRECTORY}.json', 'w', encoding='UTF-8') as f:
+with open(json_path, 'w', encoding='UTF-8') as f:
     json.dump(RESULTS, f)
 
 # constructing dataframe for Excel table (A1 is filename, B1 B2 are values, C1 C2 are labels etc)
@@ -61,4 +65,4 @@ for i, row in df.iterrows():
     reshaped_data.append([None, row['standard_score'], 'standard_score'])
 
 reshaped_df = pd.DataFrame(reshaped_data, columns=['A', 'B', 'C'])
-reshaped_df.to_excel(f'{DIRECTORY}.xlsx', index=False, header=False)
+reshaped_df.to_excel(excel_path, index=False, header=False)

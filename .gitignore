@@ -1,6 +1,7 @@
 # Sample comparing results
 *.xlsx
 *.json
+results/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
