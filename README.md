@@ -9,7 +9,7 @@ Python tool for finding offset of an mp3 file within another mp3 files. Supports
 * yt-dlp (more about it [here](https://github.com/yt-dlp/yt-dlp))
 
 It is recommended not to use Python >3.11.\
-You may install them "as is": ```pip install tqdm pandas openpyxl audio-offset-finder```.\
+You may install them "as is": ```pip install tqdm pandas openpyxl audio-offset-finder yt-dlp```.\
 If it's problematic, use fixed versions from ```requirements.txt```: ```pip install -r requirements.txt```.\
 
 ## Features
