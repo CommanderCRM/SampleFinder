@@ -1,8 +1,8 @@
 import json
 import argparse
-import subprocess
 import os
 from pathlib import Path
+from yt_dlp import YoutubeDL
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -24,11 +24,16 @@ mp3s_dir = curr_dir / DIRECTORY
 
 if args.download and args.channel:
     mp3s_dir.mkdir(parents=True, exist_ok=True)
-    subprocess.run(['yt-dlp', '-x', '--audio-format', 'mp3', '--audio-quality', '0',
-                    '-f', 'best', '-N', '5',
-                    '-o', f'{mp3s_dir}{os.sep}%(title)s.%(ext)s',
-                    '--verbose', f'https://www.youtube.com/@{args.channel}'],
-                    check=True)
+    with YoutubeDL({
+                        'format': 'bestaudio/best',
+                        'postprocessors': [{
+                            'key': 'FFmpegExtractAudio',
+                            'preferredcodec': 'mp3',
+                            'preferredquality': '320',
+                        }],
+                        'outtmpl': f'{mp3s_dir}{os.sep}%(title)s.%(ext)s',
+                        'quiet': False}) as ydl:
+        ydl.download([f'https://www.youtube.com/@{args.channel}'])
 
 # constructing dict
 for file in tqdm(list(mp3s_dir.rglob('*.mp3'))):
