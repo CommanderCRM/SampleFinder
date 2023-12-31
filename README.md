@@ -5,14 +5,15 @@ Python tool for finding offset of an mp3 file within another mp3 files. Supports
 * tqdm
 * pandas
 * openpyxl
-* audio-offset-finder (find about it [here](https://github.com/bbc/audio-offset-finder))
+* audio-offset-finder (more about it [here](https://github.com/bbc/audio-offset-finder))
+* yt-dlp (more about it [here](https://github.com/yt-dlp/yt-dlp))
 
 It is recommended not to use Python >3.11.\
 You may install them "as is": ```pip install tqdm pandas openpyxl audio-offset-finder```.\
 If it's problematic, use fixed versions from ```requirements.txt```: ```pip install -r requirements.txt```.\
 
 ## Features
-* Downloading all videos from YT channel and converting them to .mp3s (yt-dlp needed)
+* Downloading all videos from YT channel and converting them to .mp3s
 * Finding offsets between one .mp3 file and numerous others (either downloaded or stored)
 * Outputting results to JSON and XLSX
 
