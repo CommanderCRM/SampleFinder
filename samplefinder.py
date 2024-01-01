@@ -36,13 +36,21 @@ class SampleFinder:
             self.mp3s_dir.mkdir(parents=True, exist_ok=True)
             with YoutubeDL({
                                 'format': 'bestaudio/best',
-                                'postprocessors': [{
-                                    'key': 'FFmpegExtractAudio',
-                                    'preferredcodec': 'mp3',
-                                    'preferredquality': '320',
-                                }],
+                                'final_ext': 'mp3',
+                                'extract_flat': 'discard_in_playlist',
+                                'postprocessors': [{'key': 'FFmpegExtractAudio',
+                                                    'nopostoverwrites': False,
+                                                    'preferredcodec': 'mp3',
+                                                    'preferredquality': '0'},
+                                                    {'key': 'FFmpegConcat',
+                                                    'only_multi_video': True,
+                                                    'when': 'playlist'}],
                                 'outtmpl': f'{self.mp3s_dir}{os.sep}%(title)s.%(ext)s',
-                                'quiet': False}) as ydl:
+                                'verbose': True,
+                                'retries': 10,
+                                'ignoreerrors': 'only_download',
+                                'fragment_retries': 10,
+                                'concurrent_fragment_downloads': 5}) as ydl:
                 ydl.download([f'https://www.youtube.com/@{self.args.channel}'])
 
     def find_offsets(self):
