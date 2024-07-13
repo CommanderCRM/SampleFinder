@@ -35,4 +35,4 @@ options:
 ```python3 samplefinder.py -d my_dir --download -c dominik500``` - download everything from "dominik500" channel and use .mp3s stored in "my_dir".
 
 ## Notes
-The .mp3 file is hardcoded for now as ekt.mp3 [found](https://en.wikipedia.org/wiki/Ulterior_Motives_(song))
+The .mp3 file is hardcoded for now as ekt.mp3 - [found](https://en.wikipedia.org/wiki/Ulterior_Motives_(song))!
