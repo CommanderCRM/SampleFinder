@@ -1,5 +1,5 @@
 numpy==2.5.1
-tqdm==4.69.0
+tqdm==4.70.0
 audio-offset-finder==0.5.5
 pandas==3.0.5
 openpyxl==3.1.5
